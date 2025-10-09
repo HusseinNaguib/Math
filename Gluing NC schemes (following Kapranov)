@@ -1,0 +1,528 @@
+\documentclass[12pt]{article}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+
+\usepackage{import}
+% Typesetting Packages
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[a4paper, total={7in, 9.5in}]{geometry}
+
+% Math Packages
+ 
+\usepackage{amsthm, amssymb, amsmath, centernot, graphicx}
+
+\usepackage{stmaryrd}
+\newcommand{\dbrac}[1]{\llbracket #1 \rrbracket}
+
+% Fonts
+
+\usepackage{calligra, mathrsfs}
+\usepackage{lmodern}
+\usepackage[T2A,T1]{fontenc}
+\usepackage{dsfont}
+\newcommand{\1}{\mathds{1}}
+
+% Other Font Options
+
+% \usepackage{mathpazo} % The Rising Sea
+% \usepackage{euler}
+
+% \usepackage{euler} % Vaughan's notes
+% \usepackage{eulervm}
+
+%\usepackage{kpfonts}  
+
+% \usepackage{libertine} 
+% \usepackage{libertinust1math}
+
+\usepackage{amsfonts} % Stacks project math font
+
+% Make a not ugly version of widetilde
+
+\DeclareSymbolFont{kplargesymbols}{OMX}{jkp}{m}{n}
+\DeclareMathAccent{\wt}{\mathalpha}{kplargesymbols}{"65}
+\DeclareMathAccent{\wtt}{\mathord}{largesymbols}{"65}
+\newcommand{\wh}[1]{\widehat{#1}}
+
+% Graphics Packages
+
+\usepackage{tikz-cd}
+\usepackage{graphicx}
+
+\newsavebox{\pullbacksymbol}
+\sbox\pullbacksymbol{%
+\begin{tikzpicture}%
+\draw (0,0) -- (1ex,0ex);%
+\draw (1ex,0ex) -- (1ex,1ex);%
+\end{tikzpicture}}
+
+\newsavebox{\pushoutsymbol}
+\sbox\pushoutsymbol{%
+\begin{tikzpicture}%
+\draw (0,0) -- (-1ex,0ex);%
+\draw (-1ex,0ex) -- (-1ex,-1ex);%
+\end{tikzpicture}}
+
+\newcommand{\pullback}{\arrow[dr, phantom, "\usebox\pullbacksymbol" , very near start, color=black]}
+\newcommand{\cartesian}{\arrow[dr, phantom, "\usebox\pullbacksymbol" , very near start, color=black]}
+\newcommand{\pushout}{\arrow[lu, phantom, "\usebox\pushoutsymbol" , very near start, color=black]}
+
+\newcommand{\connectingmap}[1]{
+\arrow[draw=none]{d}[name=Z, shape=coordinate]{}
+\arrow[#1,
+rounded corners, crossing over,
+to path={ -- ([xshift=2ex]\tikztostart.east)
+|- (Z) [near end]\tikztonodes
+-| ([xshift=-2ex]\tikztotarget.west)
+-- (\tikztotarget)}]}
+
+% Names and Words
+
+\usepackage{xspace}
+
+\newcommand{\Mustata}{Musta\c{t}\u{a}\xspace}
+\newcommand{\Kahler}{K\"{a}hler\xspace}
+\newcommand{\Poincare}{Poincar\'{e}\xspace}
+\newcommand{\Kollar}{Koll\'{a}r\xspace}
+\newcommand{\Kovacs}{Kov\'{a}cs\xspace}
+
+\newcommand{\et}{\text{\'{e}t}}
+\newcommand{\etale}{\'{e}tale\xspace}
+\newcommand{\fppf}{\mathrm{fppf}}
+
+\newcommand{\cech}{\v{C}ech\xspace}
+
+% General Utilities 
+
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\bbar}[1]{\overline{#1}}
+\renewcommand{\bf}[1]{\mathbf{#1}}
+\newcommand{\notimplies}{%
+  \mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\usepackage{hyperref}
+\newcommand{\chref}[2]{\href{#1}{\color{blue}{\underline{#2}}}}
+
+% Set-Theoretic Commands
+
+\newcommand{\sm}{\! \setminus \!}
+\renewcommand{\empty}{\varnothing}
+\newcommand{\sub}{\subset}
+\newcommand{\sups}{\supset}
+
+% Functions
+
+\newcommand{\embed}{\hookrightarrow}
+\newcommand{\hook}{\hookrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\surj}{\twoheadedrightarrow}
+
+\usetikzlibrary{arrows.meta}
+\newcommand*{\TikzArrow}[1][]{\mathbin{\tikz [baseline=-0.25ex,-latex,#1] \draw [#1] (0pt,0.5ex) -- (1.3em,0.5ex);}}%
+\newcommand*{\TikzBiArrow}[1][]{\mathbin{\tikz [baseline=-0.25ex,-latex, #1] \draw [#1] (0pt,0.5ex) -- (1.3em,0.5ex) node[midway, above, label={[label distance=-0.4cm]$\sim$}] {} ;}}
+\newcommand{\iso}{\TikzBiArrow[->]}
+
+\newcommand{\tolabel}[1]{\xrightarrow{#1}}
+\newcommand{\lmap}[1]{\xrightarrow{#1}}
+
+% Commands on Functions
+
+\newcommand{\id}{\mathrm{id}}
+\DeclareMathOperator{\coker}{\mathrm{coker}}
+\DeclareMathOperator{\eq}{\mathrm{eq}}
+\DeclareMathOperator{\coeq}{\mathrm{coeq}}
+\renewcommand{\Im}[1]{\mathrm{Im}\left( #1 \right)}
+\DeclareMathOperator{\im}{\mathrm{im}}
+\DeclareMathOperator{\coim}{\mathrm{coim}}
+\newcommand{\invI}[2]{#1^{-1} \left( #2 \right)}
+\newcommand{\ev}{\mathrm{ev}}
+
+% Complex Analysis Commands
+
+\newcommand{\real}[1]{\mathfrak{Re}\left( #1 \right)}
+\newcommand{\imag}[1]{\mathfrak{Im}\left( #1 \right)}
+
+% Category-Theoretic Commands
+
+\newcommand{\Hom}[3]{\mathrm{Hom}_{#1} \left( #2, #3 \right)}
+\newcommand{\uHom}[3]{\underline{\mathrm{Hom}}_{#1} \left( #2, #3 \right)}
+\newcommand{\RHom}[3]{\mathrm{RHom}_{#1} \left( #2, #3 \right)}
+\newcommand{\uRHom}[3]{\underline{\mathrm{RHom}}_{#1} \left( #2, #3 \right)}
+\newcommand{\Homover}[3]{\mathrm{Hom}_{#1} \left( #2, #3 \right)}
+\newcommand{\Der}[3][]{\mathrm{Der}_{#1} \left( #2, #3 \right)}
+\newcommand{\End}[2][]{\mathrm{End}_{#1} \left( #2 \right)}
+\newcommand{\Aut}[2][]{\mathrm{Aut}_{#1} \left( #2 \right)}
+
+\newcommand{\op}{\mathrm{op}}
+\DeclareMathOperator*{\colim}{\mathrm{colim}}
+\DeclareMathOperator*{\dlim}{\varinjlim}
+\DeclareMathOperator*{\ilim}{\varprojlim}
+
+% Commands for Groups and Actions
+
+\newcommand{\ab}{\mathrm{ab}}
+\DeclareMathOperator{\ord}{\mathrm{ord}}
+\newcommand{\fix}[2]{\mathrm{Fix}_{#1} (#2)}
+\newcommand{\tors}{\mathrm{tors}}
+
+\usepackage{bbm}
+\newcommand{\acts}{\; \rotatebox[origin=c]{-90}{$\circlearrowright$} \;}
+
+\DeclareMathOperator{\orb}{\mathrm{Orb}}
+\DeclareMathOperator{\stab}{\mathrm{Stab}}
+\DeclareMathOperator{\Orb}{\orb}
+\DeclareMathOperator{\Stab}{\stab}
+
+\newcommand{\galgroup}[1]{\mathrm{Gal}\left( #1 \right)}
+\newcommand{\Gal}[1]{\mathrm{Gal}\left( #1 \right)}
+\newcommand{\gal}[1]{\mathrm{Gal}\left( #1 \right)}
+\newcommand{\sep}{\mathrm{sep}}
+
+% Linear Algebra Commands
+
+\DeclareMathOperator{\rank}{\mathrm{rank}}
+\newcommand{\vspan}[1]{\mathrm{span}\! \left\{#1 \right\}}
+\newcommand{\Tr}[1]{\mathrm{Tr}\left( #1 \right)}
+\DeclareMathOperator{\tr}{\mathrm{tr}}
+\newcommand{\exterior}{\bigwedge\nolimits}
+
+% Topology Commands
+
+\newcommand{\ball}[2]{B_{#1} \! \left(#2 \right)}
+\newcommand{\topo}{\mathcal{T}}
+\newcommand{\base}{\mathcal{B}}
+
+\newcommand{\RP}{\mathbb{RP}}
+\newcommand{\rp}{\mathbb{RP}}
+\newcommand{\CP}{\mathbb{CP}}
+\newcommand{\cp}{\mathbb{CP}}
+
+% Number Theory Commands
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\NN}{\mathbb{NN}}
+\newcommand{\Zplus}{\mathbb{Z}^{+}}
+\newcommand{\Primes}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\newcommand{\divides}{\mid}
+\newcommand{\ndivides}{\centernot \mid}
+\newcommand{\modeq}[3]{#1 \equiv #2 \quad (\mathrm{mod} \: {#3})}
+\DeclareMathOperator{\ch}{\mathrm{char}}
+
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+% Homological Algebra Commands
+
+\DeclareMathOperator{\Frob}{\mathrm{Frob}}
+\newcommand{\dsum}{\oplus}
+\newcommand{\bop}{\bigoplus}
+\newcommand{\ot}{\otimes}
+\newcommand{\tensor}{\otimes}
+\newcommand{\bigot}{\bigotimes}
+\newcommand{\btensor}{\bigotimes}
+\newcommand{\Tor}[4]{\mathrm{Tor}^{#1}_{#2} \left( #3, #4 \right)}
+\newcommand{\Ext}[4]{\mathrm{Ext}^{#1}_{#2} \left( #3, #4 \right)}
+
+% Simplicial Commands
+
+\DeclareMathOperator{\sk}{\mathrm{sk}}
+\DeclareMathOperator{\cosk}{\mathrm{cosk}}
+\DeclareMathOperator{\bfsk}{\mathbf{sk}}
+\DeclareMathOperator{\bfcosk}{\mathbf{cosk}}
+
+% Representation Theory Commands
+
+\newcommand{\Res}[3]{\mathrm{Res}^{#1}_{#2} \left( #3 \right)}
+\newcommand{\Ind}[3]{\mathrm{Ind}^{#1}_{#2} \left( #3 \right)}
+\newcommand{\Rep}{\mathrm{Rep}}
+
+% Calculus Commands
+
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dc}{\mathrm{d}^c}
+\newcommand{\dn}[2]{ \mathrm{d}^{#1} #2 \:}
+\newcommand{\deriv}[2]{\frac{\d{#1}}{\d{#2}}}
+\newcommand{\nderiv}[3]{\frac{\dn{#1}{#2}}{\d{#3}^{#1}}}
+\newcommand{\pderiv}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\parsq}[2]{\frac{\partial^2{#1}}{\partial{#2}^2}}
+\newcommand{\npar}[3]{\frac{\partial^{#1} #2}{\partial {#3}^{#1}}}
+
+% Environments and Proofs
+
+\renewcommand{\qedsymbol}{$\square$}
+\newcommand{\cont}{$\boxtimes$}
+ 
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{thm}[theorem]{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{lm}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{ex}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{conj}[theorem]{Conjecture}
+
+
+\newcommand{\newmarkedtheorem}[1]{%
+  \newenvironment{#1}
+    {\csname inner@#1\endcsname}{
+    \vspace{5pt}
+	\hrule
+	\vspace{6pt}
+	}%
+  \newtheorem{inner@#1}%
+} % WHAT DOES THIS DO??
+
+
+\newmarkedtheorem{exercise}[theorem]{Exercise}
+\newmarkedtheorem{exr}[theorem]{Exercise}
+
+\newenvironment{defnolab}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}} % WHAT DOES THIS DO??
+
+\newenvironment{lproof}{\begin{proof} \renewcommand{\qedsymbol}{}}{\end{proof}} % WHAT DOES THIS DO??
+
+% what do these do?
+
+\usepackage{stmaryrd}
+\usepackage{relsize}
+\usepackage{mathtools}
+ 
+
+% Caligraphic Sheaf Operators
+
+\DeclareMathOperator{\calHom}{\mathscr{H}\text{\kern -5pt {\calligra\large om}}}
+\DeclareMathOperator{\calExt}{\mathscr{E}\text{\kern -3pt {\calligra\large xt}}}
+\DeclareMathOperator{\calTor}{\mathscr{T}\text{\kern -5pt {\calligra\large or}}}
+\DeclareMathOperator{\calEnd}{\mathscr{E}\text{\kern -3pt {\calligra\large nd}}}
+\DeclareMathOperator{\calDer}{\mathscr{D}\text{\kern -3pt {\calligra\large er}}}
+\DeclareMathOperator{\calDiff}{\mathscr{D}\text{\kern -3pt {\calligra\large iff}}}
+\DeclareMathOperator{\calAnn}{\mathscr{A}\text{\kern -3pt {\calligra\large nn}}}
+
+\newcommand{\shHom}[3]{\calHom_{#1} \! \! \left( #2, #3 \right)}
+\newcommand{\shHomover}[3]{\calHom_{#1} \! \! \left( #2, #3 \right)}
+\newcommand{\shExt}[4]{\calExt^{\: \: \: #1}_{#2} \! \! \left( #3, #4 \right)}
+\newcommand{\shTor}[4]{\calTor^{\, #1}_{\, #2} \! \! \left( #3, #4 \right)}
+\newcommand{\shEnd}[2]{\calEnd_{#1} \! \! \left( #2 \right)}
+\newcommand{\shDer}[2]{\calDer\left( #1, #2 \right)}
+\newcommand{\shDero}[3]{\calDer_{#1}\! \left( #2, #3 \right)}
+\newcommand{\shDiff}[4]{\calDiff^{\quad #1}_{#2}\! \left( #3, #4 \right)}
+\newcommand{\Diff}[4]{\mathrm{Diff}^{#1}_{#2}\left( #3, #4 \right)}
+\newcommand{\Sym}[2]{\mathrm{Sym}_{#1}\! \left( #2 \right)}
+\newcommand{\nSym}[2]{\mathrm{Sym}^{#1}\! \left( #2 \right)}
+\newcommand{\noSym}[3]{\mathrm{Sym}^{#1}_{#2}\! \left( #3 \right)}
+\newcommand{\shAnn}[2]{\calAnn_{\, #1} \! \left(#2 \right)}
+
+% Dimensionality
+
+\newcommand{\codim}[1]{\mathrm{codim}\left( #1 \right)}
+
+% Chow Groups
+
+\newcommand{\CH}{\mathrm{CH}}
+
+% Names for Prime Ideals
+
+\renewcommand{\a}{\mathfrak{a}}
+\newcommand{\p}{\mathfrak{p}}
+\newcommand{\q}{\mathfrak{q}}
+\newcommand{\m}{\mathfrak{m}}
+
+% Classical Lie Groups
+
+\renewcommand{\U}{\mathrm{U}}
+\renewcommand{\O}{\mathrm{O}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\PGL}{\mathrm{PGL}}
+\newcommand{\PSL}{\mathrm{PSL}}
+\newcommand{\Sp}{\mathrm{Sp}}
+
+% Important Categories
+
+\newcommand{\Mod}[1]{\mathbf{Mod}_{#1}}
+\newcommand{\Grp}{\mathbf{Grp}}
+\newcommand{\Ab}{\mathbf{Ab}}
+\newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\Top}{\mathbf{Top}}
+\newcommand{\Ch}[1]{\mathbf{Ch}\left( #1 \right)}
+
+\newcommand{\Var}{\mathbf{Var}}
+\newcommand{\Sch}{\mathbf{Sch}}
+\newcommand{\Sh}{\mathfrak{Sh}}
+\newcommand{\Coh}[1]{\mathfrak{Coh}\left(#1\right)}
+\newcommand{\QCoh}[1]{\mathfrak{QCoh}\left(#1\right)}
+\newcommand{\Qcoh}[1]{\mathfrak{QCoh}\left(#1\right)}
+\newcommand{\shMod}[1]{\mathscr{M}\text{\kern -3pt \calligra\large od} \: \left(#1\right)}
+
+\newcommand{\FEt}{\mathrm{F\'{E}t}}
+
+% Names for Categories 
+
+\renewcommand{\C}{\mathcal{C}}
+\newcommand{\D}{\mathcal{D}}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cP}{\mathcal{P}}
+
+% Names for Sheaves
+
+\newcommand{\F}{\mathscr{F}}
+\newcommand{\G}{\mathscr{G}}
+\renewcommand{\H}{\mathscr{H}}
+\newcommand{\I}{\mathscr{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\K}{\mathscr{K}}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\Csh}{\mathscr{C}}
+\renewcommand{\S}{\mathcal{S}}
+
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sN}{\mathcal{N}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathcal{Q}}
+
+\newcommand{\cH}{\mathcal{H}}
+
+% Names for Schemes
+
+\newcommand{\X}{\mathscr{X}}
+\newcommand{\Hilb}{\mathrm{Hilb}}
+\newcommand{\Quot}{\mathrm{Quot}}
+
+% Ring-Theoretic Commands
+
+\newcommand{\Frac}[1]{\mathrm{Frac}\left(#1\right)}
+\newcommand{\Jac}[1]{\mathrm{Jac}\left( #1 \right)}
+\newcommand{\Ann}[2]{\mathrm{Ann}_{#1}\left(#2\right)}
+\newcommand{\Ass}[2]{\mathrm{Ass}_{#1}\left( #2 \right)}
+\newcommand{\supp}[2]{\mathrm{Supp}_{#1} \left( #2 \right) }
+\newcommand{\Supp}[2]{\mathrm{Supp}_{#1}\left(#2 \right)}
+\newcommand{\spec}[1]{\mathrm{Spec}\left( #1 \right)}
+\newcommand{\rSpec}[2]{\mathbf{Spec}_{#1}\left( #2 \right)}
+\newcommand{\Spec}[1]{\mathrm{Spec}\left( #1 \right)}
+\newcommand{\mspec}[1]{\mathrm{mSpec}\left( #1 \right)}
+\newcommand{\mSpec}[1]{\mathrm{mSpec}\left( #1 \right)}
+\newcommand{\Proj}[1]{\mathrm{Proj}\left( #1 \right)}
+\newcommand{\rProj}[2]{\mathbf{Proj}_{#1}\left( #2 \right)}
+\newcommand{\proj}[1]{\mathrm{Proj}\left( #1 \right)}
+\newcommand{\rad}[1]{\mathrm{rad}\left( #1 \right)}
+\newcommand{\nilrad}[1]{\mathrm{nilrad}\left( #1 \right)}
+\newcommand{\gr}[2]{\mathbf{gr}_{#1}\left(#2\right)}
+\newcommand{\height}[1]{\mathbf{ht}\left( #1 \right)}
+\newcommand{\length}[2]{\mathrm{length}_{#1}\left( #2 \right)}
+\newcommand{\modSym}[2]{\mathrm{Sym}^{#1}\left( #2 \right)}
+\newcommand{\shSym}[2]{\mathrm{Sym}_{#1}\left( #2 \right)}
+\newcommand{\trdeg}[2]{\mathrm{trdeg}_{#1}(#2)}
+\newcommand{\red}{\mathrm{red}}
+\newcommand{\depth}[2]{\mathrm{depth}_{#1} \left( #2 \right)}
+
+
+% Sheaf-Theoretic Commands
+
+\newcommand{\res}{\mathrm{res}}
+\newcommand{\struct}[1]{\mathcal{O}_{#1}}
+\newcommand{\stalk}[2]{\mathcal{O}_{#1, #2}}
+
+% Divisors and Picard Group
+
+\newcommand{\Alb}{\mathrm{Alb}}
+\newcommand{\sPic}{\mathrm{Pic}}
+\newcommand{\fPic}{\mathrm{Pic}}
+\newcommand{\cPic}{\mathscr{P}\text{\kern -4pt {\calligra\large ic}}\,}
+\newcommand{\Pic}[2][]{\mathrm{Pic}^{#1} \left( #2 \right)}
+
+\newcommand{\Br}[1]{\mathrm{Br} \left( #1 \right)}
+\newcommand{\Cl}[1]{\mathrm{Cl} \left( #1 \right)}
+\newcommand{\CaCl}[1]{\mathrm{CaCl}\left( #1 \right)}
+\newcommand{\CaClcirc}[1]{\mathrm{CaCl}^\circ\left( #1 \right)}
+
+\DeclareMathOperator{\NS}{\mathrm{NS}}
+\newcommand{\shDiv}{\mathfrak{Div}}
+
+\newcommand{\Div}[1]{\mathrm{Div}\left( #1 \right)}
+\newcommand{\CaDiv}[1]{\mathrm{CaDiv}\left( #1 \right)}
+\renewcommand{\div}{\mathrm{div}}
+
+\DeclareMathOperator{\Exc}{\mathrm{Exc}}
+
+% GAGA
+
+\newcommand{\an}{\mathrm{an}}
+
+% Cohomology Commands
+
+\newcommand{\dR}{\mathrm{dR}}
+\newcommand{\Cech}{\check{\mathscr{C}}}
+
+% Important Schemes 
+
+\newcommand{\A}{\mathbb{A}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Ga}{\mathbb{G}_a}
+\newcommand{\Gm}{\mathbb{G}_m}
+
+% Operations on Schemes
+
+\newcommand{\Sing}[1]{\mathrm{Sing}\left( #1 \right)}
+\newcommand{\spto}{\rightsquigarrow}
+\newcommand{\specialize}{\rightsquigarrow}
+\newcommand{\Bl}{\mathrm{Bl}}
+\newcommand{\sing}{\mathrm{sing}}
+\newcommand{\smooth}{\mathrm{sm}}
+
+% Rational Maps
+
+\newcommand{\rat}{\TikzArrow[->, densely dashed]}
+\newcommand{\birat}{\TikzBiArrow[->, densely dashed]}
+\newcommand{\Dom}[1]{\mathrm{Dom}\left(#1 \right)}
+
+
+\begin{document}
+
+\section{Recalling NC-smooth schemes}
+We start by recalling the main definitions following Kapranov's approach to NC geometry.
+
+
+
+
+\end{document}
