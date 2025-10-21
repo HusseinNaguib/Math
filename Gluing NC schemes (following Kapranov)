@@ -520,14 +520,6 @@ to path={ -- ([xshift=2ex]\tikztostart.east)
 
 \begin{document}
 
-\section{Some elementary deformation theory}
-We begin by giving some elementary heuristic computations (following notes by M. Artin):
-\begin{ex}[\textit{First ord. embedded deformations}]
-Let $x,y$ be coordinates on $\mathbb{A}^2$ and let $V(f)\subset\mathbb{A}^2$. Our goal is to classify all possible quotients 
-
-\end{ex}
-\section{Formally smooth functors}
-
 \section{NC-smooth affine schemes (following Kapranov)}
 We start by recalling the main definitions following Kapranov's approach to NC-geometry.
 \bigskip\\ 
@@ -571,5 +563,3 @@ Kapranov defines the notions of $d$-\textbf{smoothness} and $NC$-\textbf{smoothn
     Given an $NC$--complete algebra $R$, the associated $NC$-complete affine scheme has underlying topological space $X:=\spec{R_{ab}}$ and sheaf of rings given by $$\lim_{\longleftarrow}\mathcal{O}_{X_d}.$$
 \end{defn}
 \end{document}
-
-
