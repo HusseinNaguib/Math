@@ -554,7 +554,7 @@ Kapranov defines the notions of $d$-\textbf{smoothness} and $NC$-\textbf{smoothn
 \begin{prop}
     Given an affine $NC$-\textbf{nilpotent} scheme $X$ as above, the we have:
     \begin{enumerate}
-        \item The stalk $\widetilde{\mathcal{O}}_{\mathfrak{P}}$ is a local ring.
+        \item The stalk $\widetilde{\mathcal{O}}_{\mathfrak{p}}$ is a local ring.
         \item $\Gamma(X,\widetilde{\mathcal{O}})=R$.
     \end{enumerate}
 \end{prop}
