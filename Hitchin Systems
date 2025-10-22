@@ -554,6 +554,13 @@ Recall that a vector bundle $E$ on a curve $X$ is said to be stable if it is slo
 \end{defn}
 \bigbreak
 \begin{rmk}
-    Suppose $E$ is stable, then $Hom_{X}(E,E)=0$. Indeed, suppose $0\neq \phi\in Hom_X(E,E)$ then $\phi(E)$ is a subbundle of $E$. 
+    Suppose $E$ is stable, then $Hom_{X}(E,E)=0$. Indeed, suppose $0\neq \phi\in Hom_X(E,E)$ then $\phi(E)$ is a subbundle of $E$, which has slope $\leq$ that of $E$. To see this last, use the basic fact that the existence of a nonzero map of line bundles $L_1\to L_2$ implies that $deg(L_1)< deg(L_2)$.
 \end{rmk}
+\begin{lemma}
+    Suppose $E$ is stable, then $Hom_X(E,E)=0$.
+\end{lemma}
+\begin{proof}
+    Suppose $0\neq\phi\in Hom_X(E,E)$, then $\phi(E)$ is a sub-bundle of $E$. Moreover, we have a map $$\wedge^{\text{rk }E}E\rightarrow \wedge^{\text{rk }\phi(E)}\phi(E).$$ But then $\wedge^{\text{rk }E}E^{*}\otimes \wedge^{\text{rk }\phi(E)}\phi(E)$ corresponds to an effective divisor. This gives $$0\leq deg(\wedge^{\text{rk }E}E^{*}\otimes \wedge^{\text{rk }\phi(E)}\phi(E))=deg(\phi(E))-deg(E).$$ We conclude that $\frac{deg(\phi(E))}{\text{rk }\phi(E)}\geq \frac{deg(E)}{\text{rk }E}$ which contradicts the assumption that $E$ is stable.
+\end{proof}
 \end{document}
+
