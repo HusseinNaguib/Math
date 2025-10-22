@@ -569,6 +569,6 @@ Recall that a vector bundle $E$ on a curve $X$ is said to be stable if it is slo
     $\text{dim}_{\mathbb{C}}T_{[E]}\text{Bun}_G^{\circ}(X)=Ext^1_X(E,E)=(g-1)(\text{rk }E)^2$, where $g$ is the genus of the curve $X$.
 \end{prop}
 \begin{proof}
-    The first equality follows by the basic theory of infinitesimal doformations, the second equality follows from \textbf{Riemann-Roch} combined with \textit{Lemma 2.0.2}.
+    The first equality follows by the basic theory of infinitesimal deformations, the second equality follows from \textbf{Riemann-Roch} combined with \textit{Lemma 2.0.2}.
 \end{proof}
 \end{document}
