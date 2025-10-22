@@ -541,7 +541,7 @@ Let $X$ be a algebraic variety and $G$ an affine algebraic group.
 \begin{prop}
     The pseudofunctor $\text{Bun}_G(X)$ defined by 
     $$\mathbb{C}-alg\ni A\mapsto \text{Bun}_G(X)(A)\in \textbf{Grpd}$$
-    where $\text{Bun}_G(X)(A)$ is the groupoid whose objects are $\big\{ G\text{-bundles }P\rightarrow X\times \spec{A}\big\}$ and whose morphisms are isomorphisms of $G$-bundles, is an algebraic stack. 
+    where $\text{Bun}_G(X)(A)$ is the groupoid whose objects are $\big\{\text{principal } G\text{-bundles }P\rightarrow X\times \spec{A}\big\}$ and whose morphisms are isomorphisms of $G$-bundles, is an algebraic stack. 
 \end{prop}
 \bigbreak
 \noindent We now restrict our attention to the $\text{Bun}_G^{\circ}(X)\subset \text{Bun}_G(X)$ defined as the substack of \textit{stable} $G$-bundles. It will turn out to be represented by a nonsingular variety. We start by looking only at the case $G=GL_n$.
@@ -562,5 +562,13 @@ Recall that a vector bundle $E$ on a curve $X$ is said to be stable if it is slo
 \begin{proof}
     Suppose $0\neq\phi\in Hom_X(E,E)$, then $\phi(E)$ is a sub-bundle of $E$. Moreover, we have a map $$\wedge^{\text{rk }E}E\rightarrow \wedge^{\text{rk }\phi(E)}\phi(E).$$ But then $\wedge^{\text{rk }E}E^{*}\otimes \wedge^{\text{rk }\phi(E)}\phi(E)$ corresponds to an effective divisor. This gives $$0\leq deg(\wedge^{\text{rk }E}E^{*}\otimes \wedge^{\text{rk }\phi(E)}\phi(E))=deg(\phi(E))-deg(E).$$ We conclude that $\frac{deg(\phi(E))}{\text{rk }\phi(E)}\geq \frac{deg(E)}{\text{rk }E}$ which contradicts the assumption that $E$ is stable.
 \end{proof}
-\end{document}
+\bigbreak
+\noindent It is well know that the substack $\text{Bun}_G^{\circ}(X)\subset\text{Bun}_G(X) $ of stable bundles is representable by a smooth variety. Our next goal is to calculate the dimension of this variety. Since $\text{Bun}_G^{\circ}(X)$ is smooth, we only need to calculate the dimension of the tangent spaces at an arbitrary point $[E]$.
 
+\begin{prop}
+    $\text{dim}_{\mathbb{C}}T_{[E]}\text{Bun}_G^{\circ}(X)=Ext^1_X(E,E)=(g-1)(\text{rk }E)^2$, where $g$ is the genus of the curve $X$.
+\end{prop}
+\begin{proof}
+    The first equality follows by the basic theory of infinitesimal doformations, the second equality follows from \textbf{Riemann-Roch} combined with \textit{Lemma 2.0.2}.
+\end{proof}
+\end{document}
