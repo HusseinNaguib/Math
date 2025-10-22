@@ -1,0 +1,240 @@
+\documentclass[12pt]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture} 
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{example}[thm]{Example}
+\usepackage{tikz-cd}
+
+\begin{document}
+We follow the presentation in the Stacks Project and Raynaud's \textit{Anneaux locaux henseliens}. Most proofs are different from the ones there however the differences usually turn out to be minimal and are mostly a matter of style. Contents of Ch.1 of Matsumura are assumed. \textbf{No claim of originality is made}. 
+
+\section{Quasi-finiteness}
+The setting here is that of a ring morphism $\phi:R\rightarrow S$ of finite type. 
+\begin{definition} $\phi$ is said to be quasi-finite at $\mathfrak{q}\in\text{spec}(S)$ with $\phi(\mathfrak{q})=\mathfrak{p}$, if we have that $\mathfrak{q}$ is isolated in $\phi^{-1}(\mathfrak{p})$. We say $\phi$ is quasi-finite if it is quasi-finite at all $\mathfrak{q}\in\text{spec}(S)$.
+\end{definition}
+The following is an essential tool for giving other (equivalent) definitions of quasi-finiteness.
+\begin{lem} Given a field $k$ and a finite type $k$-algebra $S$, for $\mathfrak{q}\in\text{spec}(S)$ TFAE:
+\begin{enumerate}
+\item $\mathfrak{q}$ is isolated in $\text{spec}(S)$.
+\item $\{\mathfrak{q}\}$ is a clopen set in $S$.
+\item $S_{\mathfrak{q}}$ is finite over $k$. 
+\item $\kappa(\mathfrak{q})/k$ is finite and $\text{dim }S_{\mathfrak{q}}=0$.
+\end{enumerate}
+If any of these conditions is satisfied, then $S=S_{\mathfrak{q}}\times S'$ for some finite type $k$-algebra $S'$. 
+\end{lem}
+\begin{proof}\begin{itemize}
+\item (1) implies (2): $\mathfrak{q}$ isolated in $\text{spec}(S)$ implies that $\exists f\in\text{spec}(S)$ such that $D(f)=\{\mathfrak{q}\}$. Moreover, this implies that $f\in\mathfrak{p}'$ whenever $\mathfrak{p}\subset\mathfrak{p}'$, which implies that $f\in\sqrt{\mathfrak{p}}=\mathfrak{p}$. So $\mathfrak{p}$ is necessarily maximal in $S$. \\
+
+\item (2) implies (3): $\{\mathfrak{q}\}$ clopen in $\text{spec}(S)\Rightarrow S_{\mathfrak{q}}$ is an artinian $k$-algebra and $S=S_\mathfrak{q}\times S'$. Since a direct product is of finite type $iff$ each component is of finite type, we also have $S_\mathfrak{q}$ is of finite type $/k$. Moreover, by Nakayama we get that $\mathfrak{q}^n=0$ for some $n\in\mathbb{N}$. Now as a $k$-modules, $S_{\mathfrak{q}}\simeq \mathfrak{q}\times S_{\mathfrak{q}}/\mathfrak{q}$ and $\mathfrak{q}^r/\mathfrak{q}^{r+1}$ is isomorphic as a $k$-module to a finite direct sum of copies of $S_{\mathfrak{q}}/\mathfrak{q}$. Hence the proof would be complete if we can show that $S_{\mathfrak{q}}/\mathfrak{q}$ is finite dimensional over $k$. This is established by the following lemma whose proof which can be deduced from Noether Normalization and the fact that for $x$ integral over a ring $A$, $A$ is a field $iff A[x]$ is a field. 
+
+\textit{Lemma: Let $F$ be a finite type $k$-algebra which is also a field, then $\text{dim}_kF<\infty$.}\\
+
+\item (3) implies (4): Cohen-Seidenberg gives $dim\; S_{\mathfrak{q}}= dim\; k$. Finiteness of $\kappa(\mathfrak{q})/k $ follows from it being a quotient of $S_{\mathfrak{q}}$.\\
+
+\item (4) implies (1): $dim\;S_\mathfrak{q}=0$ implies that $\mathfrak{q}$ is minimal. Our goal is to show that $\mathfrak{q}$ is maximal, which follows since $S/\mathfrak{q}\hookrightarrow\kappa(\mathfrak{q})$ the last being finite dimensional over $k$.\\
+
+
+\end{itemize}
+\end{proof}
+\begin{remark}Observe that quasi-finiteness is a local property.
+\end{remark}
+We now move on to some "permanence" type properties of quasi-finite maps.\\
+
+\begin{prop} The composition of quasi-finite maps is quasi-finite.
+\end{prop}
+\begin{proof} This can be established via the following point set-topological argument. Consider the following commutative diagrams of topological spaces:
+\[\begin{tikzcd}
+	{Z_1} & \subseteq & X \\
+	{Z_2} & \subseteq & Y
+	\arrow["\phi", from=1-3, to=2-3]
+	\arrow[from=1-1, to=2-1]
+\end{tikzcd}\]
+such that $Z_2$ is clopen in $Y$ and $Z_1$ is clopen in $\phi^{-1}(Z_2)$, then we necessarily have that $Z_1$ is clopen in $X$. Now suppose $$\text{spec}(C)\xrightarrow{f} \text{spec}(B)\xrightarrow{g}\text{spec}(A)$$ is a composition of quasi-finite maps, and suppose given prime ideals
+\[\begin{tikzcd}
+	{\mathfrak{r}} & {\in\text{spec}(A)} \\
+	{\mathfrak{q}} & {\in\text{spec}(B)} \\
+	{\mathfrak{p}} & {\in\text{spec}(C)}
+	\arrow[maps to, from=2-1, to=1-1]
+	\arrow[maps to, from=3-1, to=2-1]
+\end{tikzcd}\]
+The proof of the proposition follows by taking $Y:=g^{-1}(\mathfrak{r})$, $X:=(g\circ f)^{-1}(\mathfrak{r})$, $Z_2:=\mathfrak{q}$ and $Z_1:=\mathfrak{p}$.
+\end{proof}
+
+\begin{prop} The base change of quasi-finite maps is quasi-finite.
+\end{prop}
+\begin{proof} Suppose $\text{spec}(B)\xrightarrow{f}\text{spec}(A)$ is quasi-finite and $A\rightarrow C$ is a ring map. Then $C\rightarrow B\otimes_A C$ is of finite type, and consider any diagram of the form
+\[\begin{tikzcd}
+	{\text{spec}(B\otimes_AC)\ni} & {\mathfrak{r}} & {\mathfrak{q}} & {\in\text{spec}(C)} \\
+	{\text{spec}(B)\ni} & { \mathfrak{p}} & {\mathfrak{s}} & {\in\text{spec}(A)}
+	\arrow[maps to, from=1-2, to=2-2]
+	\arrow[maps to, from=1-2, to=1-3]
+	\arrow[maps to, from=2-2, to=2-3]
+	\arrow[maps to, from=1-3, to=2-3]
+\end{tikzcd}\]
+We have two push out diagrams $D_1,\;D_2$:
+\[\begin{tikzcd}
+	A && C && {\kappa(\mathfrak{q})} \\
+	& {D_1} && {D_2} \\
+	B && {B\otimes_AC} && {(B\otimes_AC)\otimes_C\kappa(\mathfrak{q})}
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-1, to=3-1]
+	\arrow[from=3-1, to=3-3]
+	\arrow[from=1-3, to=3-3]
+	\arrow[from=1-3, to=1-5]
+	\arrow[from=3-3, to=3-5]
+	\arrow[from=1-5, to=3-5]
+	\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=3-3, to=1-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=3-5, to=1-3]
+\end{tikzcd}\]
+and so their composition is also a pushout diagram. Hence we have an isomorphism $(B\otimes_AC)\otimes_C\kappa(\mathfrak{q})\simeq B\otimes_A\kappa(\mathfrak{q})$.\\
+
+Now since $B_{\mathfrak{p}}\otimes_A\kappa(\mathfrak{s})\simeq(B\otimes_A\kappa(\mathfrak{s}))_{\mathfrak{p}}\simeq\kappa(\mathfrak{s})^n$, for some $n\in\mathbb{N}$ we have the following:
+$B\otimes_A\kappa(\mathfrak{s})\otimes_{\kappa(\mathfrak{s})}\kappa(\mathfrak{q})=B\otimes_A\kappa(\mathfrak{q})$ hence $(B\otimes_A\kappa(\mathfrak{q}))_{\mathfrak{r}}=(B\otimes_A\kappa(\mathfrak{q})\otimes_BB_{\mathfrak{p}})_{\mathfrak{r}}=(\kappa(\mathfrak{q})^n)_{\mathfrak{r}}$.
+\\
+Finally, the claim follows by the fact that the localization of an artinian ring is an artinian ring. 
+\\
+\\
+%Since $\kappa{(\mathfrak{q}})/\kappa(\mathfrak{s})$ is a flat extension, and $B\otimes_A\kappa(\mathfrak{s})\simeq \kappa(\mathfrak{s})[x_1,\dots,x_r]/I$ we have an exact sequence the sequence 
+%\[\begin{tikzcd}
+%	0 & {I\otimes_{\kappa(\mathfrak{s})}\kappa(\mathfrak{s})} & {\kappa(\mathfrak{s})[X_1,\dots,X_r]\otimes_{\kappa(\mathfrak{s})}\kappa(\mathfrak{q})} & {B\otimes_A\kappa(\mathfrak{q})} & 0 \\
+%	& {I^e} & {\kappa(\mathfrak{q})[X_1,\dots,X_r]}
+%	\arrow[from=1-1, to=1-2]
+%	\arrow[from=1-2, to=1-3]
+%	\arrow[from=1-3, to=1-4]
+%	\arrow[from=1-4, to=1-5]
+%	\arrow["\simeq", from=1-2, to=2-2]
+%	\arrow[from=2-2, to=2-3]
+%	\arrow["\simeq", from=1-3, to=2-3]
+%\end{tikzcd}\]
+%Hence $B\otimes_A\kappa(\mathfrak{s})\otimes_{\kappa(\mathfrak{s})}\kappa(\mathfrak{q})=B\otimes_A\kappa(\mathfrak{q})\simeq \kappa(\mathfrak{q})[X_1,\dots,X_r]/I^e$.\\
+%Finally, localizing at $\mathfrak{p}$ gives 
+\end{proof}
+\section{Quasi-finite vs. finite}
+It is clear from the definition that a finite map is automatically also quasi-finite. Although the converse is not true, there is a close relationship between the two notions. In this section we prove the Zariski Main Theorem. \\
+
+We start however with some result, which in some sense relates finiteness to the finiteness of the cardinalities of fibers.
+\begin{prop}Let $\phi:R\rightarrow S$ be a map of finite type. Suppose that for some minimal prime $\mathfrak{p}\in \text{spec}(R)$, the fiber $\text{spec}(S\otimes_R\kappa(\mathfrak{p}))$ is finite. Then $\exists g\in R-\mathfrak{p}$ such that $\phi|_{D(g)}$ is finite.  
+\end{prop}
+
+\begin{proof} The set theoretic finiteness on the fiber implies that it has the discrete topology, which implies that the fiber is the spectrum of a finite direct product of artinian local rings, hence the spectrum of an artinian local ring and $S\otimes_R\kappa(\mathfrak{p})$ is a finite $\kappa(\mathfrak{p})$-algebra. \\
+
+Since $\mathfrak{p}$ is minimal, every element in  $\mathfrak{p}$ and hence $\mathfrak{p}S_{\mathfrak{p}}$ is nilpotent. Moreover by the previous paragraph, for any presentation $\psi: R[X_1,\dots,X_n]\rightarrow S$,the image of $\psi(X_i)$ in $S\otimes_R\kappa(\mathfrak{p})$ is a root of some monic polynomial $\overline{P_i}\in \kappa(\mathfrak{p})[T]$ for which we can choose a representative in $P_i\in R_{\mathfrak{p}}[T]$. Finally, combining the two facts: Since $P_i(X_i)=0\in S\otimes_R\kappa(\mathfrak{p})=S_{\mathfrak{p}}/\mathfrak{p}S_{\mathfrak{p}}$, we have $P_i(X_i)\in \mathfrak{p}S_{\mathfrak{p}}$ and so $\exists e_i\in\mathbb{N}$ such that $P_i(X_i)^{e_i}=0\in S_{\mathfrak{p}}$. We conclude that $R_{\mathfrak{p}}\rightarrow S_{\mathfrak{p}}$ is finite.  \\
+
+\textit{Claim: For any ring map $R\rightarrow S$ of finite type, if $R_{\mathfrak{p}}\rightarrow S_{\mathfrak{p}}$ is finite then $\exists g\in R$ such that $R_g\rightarrow S_g$ is also finite.}\\
+
+\textit{proof of claim:} Suppose $\psi:R[X_1,\dots,X_n]\rightarrow S$ is a presentation for $S$. Then each $X_i$ is integral over $R_{\mathfrak{p}}$. Hence there exists some monic $P_i\in R_{\mathfrak{p}}[T]$ such that $P_i(X_i)=0\in S_{\mathfrak{p}}$ and moreover $\exists s_i\in R-\mathfrak{p}$ such that $s_iP_i(X_i)=0\in S$. Finally, chose $g$ to be the product of all the $s_i$'s multiplied by the product of all the denominators of coefficients of the $P_i$'s.  
+\end{proof}
+
+We shall also need some lemmata on integral elements. The following is an essential tool in the proof of ZMT.
+
+\begin{prop}For a map $\phi:R\rightarrow S$ of finite type and $\phi$ is quasi-finite at $\mathfrak{q}\in\text{spec}(S)$ and $\mathfrak{p}=\phi^{-1}(\mathfrak{q})$. Then TFAE:
+\begin{itemize}
+    \item (\texttt{ZMT}) $\exists f\in R'$, where $R'$ is the integral closure of $R$ in $S$, such that $f\notin \mathfrak{q}$ and $R_f'\simeq S_f$.
+    \item (\texttt{ZMT})' if $\exists$ an algebra $R\subseteq T\subseteq S$ such that $T$ is of finite type over $R$ and $S$ is finite over $T$ and $R$ is integrally closed in $S$, then $R_{\mathfrak{p}}\simeq S_{\mathfrak{p}}$.
+\end{itemize}
+\end{prop}
+\begin{proof}
+\begin{itemize}
+    \item (\texttt{ZMT})$\Rightarrow$(\texttt{ZMT})': If $R$ is integrally closed in $S$, then by (\texttt{ZMT}) we must have $R_f\simeq S_f$ for some $f\notin\mathfrak{q}$. Now since $f\notin\mathfrak{q}$, we necessarily have $R_{\mathfrak{p}}\simeq R_{f}\otimes_RR_{\mathfrak{p}}\simeq S_f\otimes_RR_{\mathfrak{p}}\simeq S_{\mathfrak{p}}$.\\  
+   
+    \item (\texttt{ZMT})'$\Rightarrow$(\texttt{ZMT}): Let $R'$ be the integral closure of $\phi(R)\subseteq S$, then $R'\subset S\subset S$ satisfies the conditions of (\texttt{ZMT})'. Hence $R'_{\mathfrak{p}}\simeq S_{\mathfrak{p}}$. Now by the claim in the proof of \textit{Proposition 2.1} we get that $\exists f\in R'$ such that $R'_f\rightarrow S_f$ is finite. But the integral closure of $R'$ implies (by a quick computation) that $R'_f$ is also integrally closed in $S_f$. We conclude that $R'_f\simeq S_f$.
+\end{itemize}
+\end{proof}
+
+Our main goal now is to prove (\texttt{ZMT})', which we will do via a series of lemmas.\\
+
+\begin{lem}Suppose $S$ is a domain containing $R[X]$, such that $S$ is integral over $R[X]$. Then $S$ is not quasi-finite over $R$ at any $\mathfrak{q}\in\text{spec}(S)$.
+\end{lem}
+\begin{proof} First, we reduce to the case where $R$ is integrally closed in its fraction field. Denote the integral closure of $R$ by $\overline{R}$. Then consider the following diagram:
+\[\begin{tikzcd}
+	R & {R[X]} & S \\
+	{\overline{R}} & {\overline{R}[X]} & {S\otimes_R\overline{R}}
+	\arrow[hook, from=1-1, to=2-1]
+	\arrow[hook, from=2-1, to=2-2]
+	\arrow[from=1-2, to=2-2]
+	\arrow[hook, from=1-1, to=1-2]
+	\arrow[hook, from=1-2, to=1-3]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-2, to=2-3]
+\end{tikzcd}\]
+Notice that the map $R\rightarrow \overline{R}$ is the localization by some multiplicative set. Hence $\overline{R}[X]\rightarrow S\otimes_R\overline{R}[X]$ is injective and $S\otimes_R\overline{R}$ is a domain. Moreover, from the (proof of the) base change property of quasi-finite maps we know that $\overline{R}\rightarrow S\otimes_R\overline{R}$ is quasi finite at any prime lying over $\mathfrak{q}$. So assume without loss of generality that $R$ is integrally closed in its fraction field. \\
+
+Next the following claim allows us to use the full power of Cohen-Seidenberg:\\
+
+\textit{Claim: If a domain $A$ is integrally closed, then so is $A[X]$.}\\
+
+\textit{proof of claim:} suppose $0=a_0+\dots+(\frac{P(X)}{Q(X)})^n$ for some $Q(X),P(X)\in A[X]$ and $a_j\in Frac(A), 0\leq j\leq n-1$. Then multipliying by $Q(X)^n$ shows that $Q(X)|P(X)$ in $Frac(A)[X]$, so $\frac{P(X)}{Q(X)}=F(X)$ for some $F(X)=f_0+\dots+f_kX^k\in Frac(A)[X]$. Moreover, observe that evaluating at $X=0$ immediately gives $f_0\in A$ by the fact that $A$ is integrally closed.\\
+Now since both $f_0\;\&\;F(X)$ are integral over $A[X]$ we must have $F(X)-f_0$ also integral over $A$. Hence $\exists$ an equation $0=a_0'+\dots+(f_1X+\dots+f_xX^k)^n$ where $a_j'\in A[X]$ for $0\leq j\leq n-1$. \\
+Observe that $a_0'(0)=0$ and so $f_1+\dots+f_kX^{k-1}$ is also integral over $A[X]$. And so the proof follows by iterating the previous argument $k$ more times, giving $F(X)\in A[X]$. $\blacksquare$\\
+
+Now let $\mathfrak{q}\cap R[X]=:\mathfrak{r}$ and $\mathfrak{q}\cap R=:\mathfrak{p}$. Then if $\exists \mathfrak{r}'\supset\mathfrak{r}$ such that $\mathfrak{r}'\cap R=\mathfrak{p}$, then by Cohen-Seidenberg $\exists \mathfrak{q}'\supset\mathfrak{q}$ such that $\mathfrak{q}'\cap R[X]=\mathfrak{r}'$. But then $\mathfrak{q}'\cap R=\mathfrak{p}$ too. Hence if $\mathfrak{q}$ is minimal in the fiber over $\mathfrak{p}$ then so is $\mathfrak{r}$. Similarly, Cohen-Seidenberg gives us that if $\mathfrak{q}$ is minimal in the fiber over $\mathfrak{p}$ then so is $\mathfrak{r}$. \\
+
+Hence we conclude that if $S$ is quasi-finite over $R$ at $\mathfrak{q}$ then $R[X]$ is quasi-finite over $R$ at $\mathfrak{r}$. But this is impossible since no prime ideal of $\kappa(\mathfrak{p})[X]=R[X]\otimes_R\kappa(\mathfrak{p})$ is both minimal and maximal at the same time. 
+\end{proof}
+
+We now move on to establish the first case of (\texttt{ZMT})'. This will allow us to use an induction argument for the general case. We start with the case were $S$ is generated over $R$ by one element.
+\begin{lem} (\texttt{ZMT})' holds in the case $S=T=R[x]$. 
+\end{lem}
+\begin{proof} Let $\mathfrak{p}:=\mathfrak{q}\cap R$ and suppose $S=R[x]=R[X]/I$ for some ideal $I$. We begin by showing that $\exists r_0,\dots,r_n\in R$ such that $r_0+\dots+r_nX^n\in I$ and $r_j\notin \mathfrak{p}$ for some $0\leq j\leq n$. For this, we show that $I\not\subseteq\mathfrak{p}R$:\\
+
+Suppose $I\subseteq\mathfrak{p}R[X]$, then we get $$(R[x]\otimes_R\kappa(\mathfrak{p}))_\mathfrak{q}=((R[X]/I)\otimes_R\kappa(\mathfrak{p}))_\mathfrak{q}$$
+$$=((R[X]\otimes_R\kappa(\mathfrak{p})/I\otimes_R\kappa(\mathfrak{p}))_\mathfrak{q}$$
+$$=(\kappa(\mathfrak{p})[X]/I\otimes_R\kappa(\mathfrak{p}))_\mathfrak{q}$$
+but the quasi-finiteness of $S$ at $\mathfrak{q}$ implies that the map $I\otimes_R\kappa(\mathfrak{p})\rightarrow\kappa(\mathfrak{p})[X]$ is not the zero map. Which is the desired result.\\
+
+Now, we move on to show that given a polynomial $r_0+\dots+r_nX^n\in I$ such that $r_j\notin I$ for some $0\leq j\leq n$ then $\exists$ another polynomial in $I$ of degree $\geq 1$ and whose leading coefficient is not in $\mathfrak{p}$. We argue by induction:\\
+\begin{itemize}\item n=1: If $r_1\in \mathfrak{p}$, then $r_1X\in\mathfrak{q}$ and so $(r_0+r_1X)-r_1X\in \mathfrak{q}\cap R=\mathfrak{p}$. Since this contradicts what we proved earlier, we must have $r_1\notin\mathfrak{p}$.
+\item Suppose the claim holds for $n=N-1$: Then if $r_0+\dots+r_NX^N\in I$ and $r_N\in \mathfrak{p}$, then $r_0+\dots+r_{N-2}X^{N-2}+(r_{N-1}+r)X^{N-1}\in I$ with $r\in R$ such that $r-r_NX\in I$, which can be done since $r_Nx$ is integral over $R$ and the latter is integrally closed. Then the claim follows by the induction hypothesis. 
+\end{itemize}
+Finally, now we know that $\exists$ an equation $0=r_0+\dots+r_nx^n$, with $r_n\notin\mathfrak{p}$ and $n\geq 1$. This implies that $x$ is integral over $R_\mathfrak{p}$. But since $R$ is integrally closed in $S$, $R_\mathfrak{p}$ is integrally closed in $S_\mathfrak{p}$. Hence $R_\mathfrak{p}=S_\mathfrak{p}$. 
+\end{proof}
+
+We now attempt to weaken the assumptions in the previous lemma a little bit. 
+\begin{lem}(\texttt{ZMT})' holds in the case $T=R[x]$ and $S$ is finite over $T$.
+\end{lem}
+\begin{proof} Let $I:=\{P(x)\in R[x]|P(x)S\subset R[x]\}$. If $I\not\subset \mathfrak{r}$, where $\mathfrak{r}:=\mathfrak{q}\cap R[X]$, then $R[x]_\mathfrak{r}=S_\mathfrak{r}$ and therefore also equal to $S_\mathfrak{q}$.\\
+
+Now we also have $R[x]_\mathfrak{r}\otimes_R\kappa(\mathfrak{p})=S_\mathfrak{q}\otimes_R\kappa(\mathfrak{p})$ is finite $/\kappa(\mathfrak{p})$. So by the previous lemma, we have $R_\mathfrak{p}=R[x]_\mathfrak{p}$. Finally, since $R$ is integrally closed in $S$, $R_\mathfrak{p}$ is integrally closed in $S_\mathfrak{p}$ and since the latter is integral over $R[x]_\mathfrak{p}$, we must have $$R_\mathfrak{p}=S_\mathfrak{p}.$$
+
+Now it remains to study what happens if $I\subseteq\mathfrak{r}$. Suppose $\mathfrak{n}\subseteq\mathfrak{q}$ is a minimal prime containing $IS$ and let $\mathfrak{m}:=\mathfrak{n}\cap R$.\\
+
+\textit{Claim: In this case, $\kappa(\mathfrak{m})\subset\kappa(\mathfrak{n})$ is a transcendental extension.}\\
+
+Assuming the claim is true, let $\overline{R}:= R/\mathfrak{m}$ and $\overline{S}:=S/\mathfrak{n}$. One observes that from the claim, we necessarily have $R[x]$ transcendental over $R$ hence we have inclusions $\overline{R}\subset\overline{R}[X]\subset\overline{S}$ where the last one is an integral extension. By base change, $\overline{S}$ is quasi-finite over $\overline{R}$, which we know is impossible by \textit{Lemma 2.3}. Therefore $I\not\subseteq\mathfrak{r}$ for which case we have already shown that (\texttt{ZMT})' holds.\\
+
+So it remains to prove the claim:\\
+
+\textit{proof of claim}: (\textit{to be added}) $\blacksquare$
+\end{proof}
+
+We now have all the ingredients to prove (\texttt{ZMT})'.
+
+\begin{thm}(\texttt{ZMT})' holds in general. 
+\end{thm}
+\begin{proof} We argue by induction on the number $n$ of generators of $T$ over $R$, the case $n=0$ being immediate.\\
+
+\begin{itemize}\item Suppose (\texttt{ZMT})' holds whenever $T$ is generated by $<n$ elements over $R$. 
+\end{itemize}
+
+Now if $T=R[x_1,\dots,x_n]$, let $\tilde{R}$ be the integral closure (in $S$) of $R[x_1,\dots,x_{n-1}]$ and let $\tilde{T}:=\tilde{R}[x_n]$. Then by \textit{Lemma 2.5}, we necessarily have $\tilde{R}_{\tilde{\mathfrak{p}}}=S_{\tilde{\mathfrak{p}}}$ where $\tilde{\mathfrak{p}}:=\mathfrak{q}\cap \tilde{R}$.\\
+
+Let $\{T^\alpha\}_{\alpha}$ be the family of finite $R[x_1,\dots,x_{n-1}]$-algebras that are contained in $\tilde{T}$. Then this family is directed and $$\tilde{T}=\varinjlim_\alpha T^\alpha.$$
+
+Moreover, letting $\mathfrak{r}_\alpha:=T^\alpha\cap\mathfrak{q}$ and $\tilde{\mathfrak{r}}:=\tilde{T}\cap\mathfrak{q}, $we have $$\tilde{T}_{\tilde{\mathfrak{r}}}=\varinjlim_\alpha {T^\alpha}_{\mathfrak{r}_\alpha}$$ 
+
+Now $\tilde{R}_{\tilde{\mathfrak{p}}}=S_{\tilde{\mathfrak{p}}}\Rightarrow \tilde{R}_{\tilde{\mathfrak{p}}}=\tilde{T}_{\tilde{\mathfrak{p}}}=\tilde{T}_{\tilde{\mathfrak{r}}}=S_{\tilde{\mathfrak{r}}}=S_\mathfrak{q}$. But since $\tilde{T}$ is of finite type over $\tilde{R}$, the generators must lie in ${T^{\alpha_0}}_{\mathfrak{r}_{\alpha_0}}$ for some $\alpha_0$. In other words, we get $$S_\mathfrak{q}=\tilde{T}_{\tilde{\mathfrak{r}}}={T^{\alpha_0}}_{\mathfrak{r}_{\alpha_0}}$$
+
+Finally, from the induction hypothesis applied to $R\subseteq R[x_1,\dots,x_{n-1}]\subseteq T^{\alpha_0}$, we get:$$R_\mathfrak{p}=T^{\alpha_0}_\mathfrak{p}={T^{\alpha_0}}_{\mathfrak{r}_{\alpha_0}} = S_\mathfrak{q}$$
+but then we necessarily have $R_\mathfrak{p}=S_\mathfrak{p}$.
+\end{proof}
+\end{document}
+
