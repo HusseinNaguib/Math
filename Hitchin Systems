@@ -553,9 +553,6 @@ Recall that a vector bundle $E$ on a curve $X$ is said to be stable if it is slo
     A vector bundle $E$ on a curve $X$ is said to be \textbf{slope stable} if for every subbundle $F\subset E$ we have $$\frac{deg(F)}{\text{rank }F}<\frac{deg(E)}{\text{rank }E}.$$ 
 \end{defn}
 \bigbreak
-\begin{rmk}
-    Suppose $E$ is stable, then $Hom_{X}(E,E)=0$. Indeed, suppose $0\neq \phi\in Hom_X(E,E)$ then $\phi(E)$ is a subbundle of $E$, which has slope $\leq$ that of $E$. To see this last, use the basic fact that the existence of a nonzero map of line bundles $L_1\to L_2$ implies that $deg(L_1)< deg(L_2)$.
-\end{rmk}
 \begin{lemma}
     Suppose $E$ is stable, then $Hom_X(E,E)=\mathbb{C}$.
 \end{lemma}
