@@ -557,7 +557,13 @@ Recall that a vector bundle $E$ on a curve $X$ is said to be stable if it is slo
     Suppose $E$ is stable, then $Hom_X(E,E)=\mathbb{C}$.
 \end{lemma}
 \begin{proof}
-    Suppose $0\neq\phi\in Hom_X(E,E)$, then $\phi(E)$ is a sub-bundle of $E$ and we get a short exact sequence $$0\rightarrow K\rightarrow E\rightarrow \phi(E)\rightarrow 0.$$ Now we claim that $deg(K)\geq0$. Indeed, by assumption we have $$0\leq \mu(E)-\mu(\phi(E))\leq \frac{deg(E)}{\text{rk }\phi(E)}-\frac{deg(\phi(E))}{\text{rk }\phi(E)}=\frac{deg(K)}{\text{rk }\phi(E)}.$$ Now since the $degree$ function is additive on short exact sequences, we conclude that $deg(\phi(E))\geq deg(E)$,  giving $$\mu(\phi(E))\geq \mu(E).$$ From this we conclude that $\phi(E)=E$. It remains to show that $\phi$ is multiplication by a scalar. For this, let $x\in X$ be a point and $\lambda\in\mathbb{C}$ an eigenvalue of $$\phi_{|_x}:E_{|_x}\rightarrow E_{|_x}$$ then by choice of $\lambda$ we know that $\phi-\lambda$ is not an isomorphism on $E$. Therefore by the previous part of this proof, we conclude that $\phi-\lambda=0.$
+    Suppose $0\neq\phi\in Hom_X(E,E)$, then $\phi(E)$ is a sub-bundle of $E$ and we get a short exact sequence $$0\rightarrow K\rightarrow E\rightarrow \phi(E)\rightarrow 0.$$ Now we claim that $deg(K)\geq0$. Indeed, by assumption we have 
+    \[\begin{tikzcd}[column sep=tiny,row sep=small]
+	& {\frac{deg(E)}{\text{rk }E}} & \geq & {\frac{deg(K)}{\text{rk }K}} & {=} & {\frac{deg(E)-deg(\phi(E))}{\text{rk }K}} \\
+	\Rightarrow & {\frac{deg(\phi(E))}{\text{rk }K}} & \geq & {\big(\frac{1}{\text{rk }K}-\frac{1}{\text{rk }E}\big)deg(E)} \\
+	\Rightarrow & {\mu(\phi(E))} & \geq & {\mu(E).}
+\end{tikzcd}\]
+    From this we conclude that $\phi(E)=E$. It remains to show that $\phi$ is multiplication by a scalar. For this, let $x\in X$ be a point and $\lambda\in\mathbb{C}$ an eigenvalue of $$\phi_{|_x}:E_{|_x}\rightarrow E_{|_x}$$ then by choice of $\lambda$ we know that $\phi-\lambda$ is not an isomorphism on $E$. Therefore by the previous part of this proof, we conclude that $\phi-\lambda=0.$
 \end{proof}
 \bigbreak
 \noindent It is well know that the substack $\text{Bun}_G^{\circ}(X)\subset\text{Bun}_G(X) $ of stable bundles is representable by a smooth variety. Our next goal is to calculate the dimension of this variety. Since $\text{Bun}_G^{\circ}(X)$ is smooth, we only need to calculate the dimension of the tangent spaces at an arbitrary point $[E]$.
@@ -569,4 +575,5 @@ Recall that a vector bundle $E$ on a curve $X$ is said to be stable if it is slo
     The first equality follows by the basic theory of infinitesimal deformations, the second equality follows from \textbf{Riemann-Roch} applied to $E\otimes E^*$, combined with \textit{Lemma 2.0.2}.
 \end{proof}
 \end{document}
+
 
